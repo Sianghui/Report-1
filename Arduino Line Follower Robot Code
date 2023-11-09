@@ -1,0 +1,70 @@
+// Arduino Line Follower Robot Code
+
+#define in1 9 //Motor1  L293 Pin in1 
+
+#define in2 6 //Motor1  L293 Pin in1 
+
+#define in3 5 //Motor2  L293 Pin in1 
+
+#define in4 3 //Motor2  L293 Pin in1 
+
+#define R_S 12//ir sensor Right
+
+#define L_S 13 //ir sensor Left
+
+void setup(){ 
+
+pinMode(R_S, INPUT); 
+
+pinMode(L_S, INPUT); 
+
+pinMode(in1, OUTPUT); 
+
+pinMode(in2, OUTPUT); 
+
+pinMode(in3, OUTPUT); 
+
+pinMode(in4, OUTPUT); 
+
+delay(1000);
+
+}
+
+void loop(){  
+//if Right Sensor and Left Sensor are at White color 
+if((digitalRead(R_S) == 0)&&(digitalRead(L_S) == 0)){forward();}   
+//if Right Sensor is Black and Left Sensor is White  
+if((digitalRead(R_S) == 1)&&(digitalRead(L_S) == 0)){turnRight();} 
+//if Right Sensor is White and Left Sensor is Black 
+if((digitalRead(R_S) == 0)&&(digitalRead(L_S) == 1)){turnLeft();}  
+//if Right Sensor and Left Sensor are at Black color 
+if((digitalRead(R_S) == 1)&&(digitalRead(L_S) == 1)){Stop();} 
+}
+
+void forward(){  //forword
+digitalWrite(in1, HIGH);  
+digitalWrite(in2, LOW);  
+digitalWrite(in3, LOW);   
+digitalWrite(in4, HIGH); 
+}
+
+void turnRight(){ //turnRight
+digitalWrite(in1, LOW);  
+digitalWrite(in2, HIGH);  
+digitalWrite(in3, LOW);   
+digitalWrite(in4, HIGH);  
+}
+
+void turnLeft(){ //turnLeft
+digitalWrite(in1, HIGH);  
+digitalWrite(in2, LOW);   
+digitalWrite(in3, HIGH); 
+digitalWrite(in4, LOW);   
+}
+
+void Stop(){ //stop
+digitalWrite(in1, LOW); 
+digitalWrite(in2, LOW);  
+digitalWrite(in3, LOW); 
+digitalWrite(in4, LOW);
+}
